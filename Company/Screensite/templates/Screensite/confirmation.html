@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Submitted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 6px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        a.button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Application Submitted!</h2>
+    <p>Thank you for submitting your application. HR will review it and get back to you shortly.</p>
+    <a class="button" href="{% url 'Screensite:confirmation' %}">Submit Another Application</a>
+</div>
+</body>
+</html>

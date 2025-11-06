@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NewJoinee Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type=text], input[type=file], select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        select {
+            background: #fff;
+            appearance: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .assigner-container {
+            margin-bottom: 20px;
+        }
+
+        .assigner-container select {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>NewJoinee Application</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="fullname">Full Name</label>
+        <input type="text" name="fullname" placeholder="Enter your full name" required>
+
+        <label for="resume">Resume</label>
+        <input type="file" name="resume" required>
+
+        <label for="adhar">Adhar Card</label>
+        <input type="file" name="adhar" required>
+
+        <label for="technology">Technology</label>
+        <select name="technology" required>
+            <option value="BD">Backend</option>
+            <option value="FD">Frontend</option>
+            <option value="FS">Fullstack</option>
+        </select>
+
+        <label for="experience">Experience</label>
+        <select name="experience" required>
+            <option value="1Y">1 Year</option>
+            <option value="2Y">2 Years</option>
+            <option value="3Y">3 Years</option>
+            <option value="4Y">4 Years</option>
+            <option value="5Y">5 Years</option>
+            <option value="6Y">6 Years</option>
+            <option value="7Y+">7+ Years</option>
+        </select>
+
+        <div class="assigner-container">
+            <label for="assigner">Assigner (Who should review this?)</label>
+            <select name="assigner">
+                <option value="MG">Manager</option>
+                <option value="EP">Employee</option>
+                <option value="OWN">Owner</option>
+                <option value="HR">HR</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit Application</button>
+    </form>
+</div>
+</body>
+</html>
+

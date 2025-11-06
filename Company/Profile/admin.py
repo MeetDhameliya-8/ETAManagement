@@ -1,4 +1,7 @@
 
+
+# Register your models here.
+
 from django.contrib import admin
 from .models import (
     User, NewJoineProfile, InternProfile,
@@ -63,5 +66,4 @@ class ManagerProfileAdmin(admin.ModelAdmin):
 class OwnerProfileAdmin(admin.ModelAdmin):
     list_display = ["FullName", "Experience"]
     search_fields = ["FullName"]
-
 

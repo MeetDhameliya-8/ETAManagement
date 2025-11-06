@@ -42,8 +42,13 @@ INSTALLED_APPS = [
     
     'rest_framework',
 
-    'Profile',
+    #Backend
     'Requests',
+    'Profile',
+
+    #frontend
+
+    'Screensite',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +91,7 @@ DATABASES = {
         "USER": "dnjtechx",
         "PASSWORD": "MeetDNJ@645",
         "HOST": "127.0.0.1",
-        "PORT": "3500",
+        "PORT": "5432",
     }
 }
 
