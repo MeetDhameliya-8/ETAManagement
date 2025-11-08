@@ -4,8 +4,8 @@
 
 from django.contrib import admin
 from .models import (
-    User, NewJoineProfile, InternProfile,
-    EmployeeProfile, HrProfile, ManagerProfile, OwnerProfile
+    User, InternProfile,
+    EmployeeProfile, HrProfile,NewJoineProfile, ManagerProfile, OwnerProfile
 )
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
@@ -34,7 +34,7 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(NewJoineProfile)
 class NewJoineProfileAdmin(admin.ModelAdmin):
-    list_display = ["FullName", "user", "created_at", "updated_at"]
+    list_display = ["FullName", "user"]
     search_fields = ["FullName", "user__email"]
 
 

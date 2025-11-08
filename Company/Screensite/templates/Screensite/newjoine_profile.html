@@ -76,48 +76,49 @@
 <body>
 <div class="container">
     <h2>NewJoinee Application</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
 
-        <label for="fullname">Full Name</label>
-        <input type="text" name="fullname" placeholder="Enter your full name" required>
+    <label for="FullName">Full Name</label>
+    <input type="text" name="FullName" placeholder="Enter your full name" required>
 
-        <label for="resume">Resume</label>
-        <input type="file" name="resume" required>
+    <label for="Resume">Resume</label>
+    <input type="file" name="Resume" required>
 
-        <label for="adhar">Adhar Card</label>
-        <input type="file" name="adhar" required>
+    <label for="AdharCard">Adhar Card</label>
+    <input type="file" name="AdharCard" required>
 
-        <label for="technology">Technology</label>
-        <select name="technology" required>
-            <option value="BD">Backend</option>
-            <option value="FD">Frontend</option>
-            <option value="FS">Fullstack</option>
+    <label for="technology">Technology</label>
+    <select name="technology" required>
+        <option value="BD">Backend</option>
+        <option value="FD">Frontend</option>
+        <option value="FS">Fullstack</option>
+    </select>
+
+    <label for="Experience">Experience</label>
+    <select name="Experience" required>
+        <option value="1Y">1 Year</option>
+        <option value="2Y">2 Years</option>
+        <option value="3Y">3 Years</option>
+        <option value="4Y">4 Years</option>
+        <option value="5Y">5 Years</option>
+        <option value="6Y">6 Years</option>
+        <option value="7Y+">7+ Years</option>
+    </select>
+
+    <div class="assigner-container">
+        <label for="assigner">Assigner (Who should review this?)</label>
+        <select name="assigner">
+            <option value="MG">Manager</option>
+            <option value="EP">Employee</option>
+            <option value="OWN">Owner</option>
+            <option value="HR">HR</option>
         </select>
+    </div>
 
-        <label for="experience">Experience</label>
-        <select name="experience" required>
-            <option value="1Y">1 Year</option>
-            <option value="2Y">2 Years</option>
-            <option value="3Y">3 Years</option>
-            <option value="4Y">4 Years</option>
-            <option value="5Y">5 Years</option>
-            <option value="6Y">6 Years</option>
-            <option value="7Y+">7+ Years</option>
-        </select>
+    <button type="submit">Submit Application</button>
+</form>
 
-        <div class="assigner-container">
-            <label for="assigner">Assigner (Who should review this?)</label>
-            <select name="assigner">
-                <option value="MG">Manager</option>
-                <option value="EP">Employee</option>
-                <option value="OWN">Owner</option>
-                <option value="HR">HR</option>
-            </select>
-        </div>
-
-        <button type="submit">Submit Application</button>
-    </form>
 </div>
 </body>
 </html>

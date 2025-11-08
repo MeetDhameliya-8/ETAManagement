@@ -5,6 +5,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from Profile.models import NewJoineProfile
 from Requests.models import HRRequest
+from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
+
 
 User = get_user_model()
 
@@ -52,34 +56,41 @@ def login_view(request):
 
 
 
-from django.contrib.auth.decorators import login_required
-
 @login_required(login_url='/Screensite/login/')
 def newjoinee_apply(request):
     if request.method == 'POST':
-        fullname = request.POST['fullname']
-        resume = request.FILES['resume']
-        adhar = request.FILES['adhar']
-        technology = request.POST['technology']
-        experience = request.POST['experience']
-        assigner_role = request.POST.get('assigner', 'HR')
+        # Get form data
+        FullName = request.POST.get('FullName')
+        Resume = request.FILES.get('Resume')
+        AdharCard = request.FILES.get('AdharCard')
+        technology = request.POST.get('technology')
+        Experience = request.POST.get('Experience')
+        assigner_role = request.POST.get('assigner', 'HR')  # default role
 
+        # Create the NewJoineProfile record
         profile = NewJoineProfile.objects.create(
             user=request.user,
-            FullName=fullname,
-            Resume=resume,
-            AdharCard=adhar,
+            FullName=FullName,
+            Resume=Resume,
+            AdharCard=AdharCard,
             technology=technology,
-            Experience=experience
+            Experience=Experience
         )
 
-        # assign HR user
+        # Try to assign HR user, but do NOT block application if none exists
         hr_user = User.objects.filter(role=assigner_role).first()
-        HRRequest.objects.create(applicant=profile, hr_user=hr_user)
+        if hr_user:
+            HRRequest.objects.create(applicant=profile, hr_user=hr_user)
+        else:
+            # Optionally, you can log this or notify admin later
+            messages.info(request, "Your application is submitted. HR will be assigned soon.")
 
+        # Redirect to confirmation page
         return redirect('Screensite:confirmation')
 
     return render(request, 'Screensite/newjoine_Profile.html')
+
+
 
 
 

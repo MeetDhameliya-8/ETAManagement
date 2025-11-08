@@ -82,7 +82,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     email = models.CharField(verbose_name='Email Address',max_length=60,unique=True)
     first_name = models.CharField(max_length=50,blank=False,null=False)
     last_name = models.CharField(max_length=50,blank=False,null=False)
-    phone = models.CharField(max_length=18,unique=True)
+    phone = models.CharField(max_length=18,unique=False)
     role = models.CharField(max_length=20,choices=ROLE_CHOICES,blank=False,null=False)
     technology = models.CharField(verbose_name='Technology',choices=TECH, blank=True,null=False)
     Experience = models.CharField(verbose_name='Experience',choices=Experience, default='1Y')
@@ -146,7 +146,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     
    
 
-class NewJoineProfile(models.Model):
+'''class NewJoineProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='newjoine_profile')
@@ -160,8 +160,22 @@ class NewJoineProfile(models.Model):
 
     Address = models.CharField(max_length=200, null=False,blank=False)
     skills = ArrayField(models.CharField(max_length=50), blank=False, null=False, default=list)
+    technology = models.CharField(choices=TECH,max_length=100, blank=True, null=True)
+    Experience = models.CharField(choices=Experience,max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)   
-    updated_at = models.DateTimeField(auto_now=True)  
+    updated_at = models.DateTimeField(auto_now=True)  '''
+
+
+class NewJoineProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='newjoine_profiles')
+    FullName = models.CharField(max_length=250)
+    Resume = models.FileField(upload_to='Profile/Resumes/')
+    AdharCard = models.ImageField(upload_to='Profile/Adhar/')
+    technology = models.CharField(max_length=100, blank=True, null=True)
+    Experience = models.CharField(max_length=100, blank=True, null=True)
+
 
 
 class InternProfile(models.Model):
@@ -185,7 +199,7 @@ class EmployeeProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee_profile')
     salary = models.DecimalField(null=False,blank=False,max_digits=10, decimal_places=2)
-    phone = models.CharField(max_length=25,unique=True,blank=False,null=False)
+    phone = models.CharField(max_length=25,unique=False,blank=True,null=True)
     Bio = models.FileField(upload_to='Profile/BioFile',blank=False,null=False,default='PENDING')
     Project = models.CharField(max_length=90,blank=False,null=False)
     Project_AssignedDate = models.DateTimeField(blank=False,null=False)
