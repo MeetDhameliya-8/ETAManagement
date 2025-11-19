@@ -7,23 +7,31 @@ from Profile.models import NewJoineProfile
 
 
 class HRRequest(models.Model):
+
     hr_user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='Requests'
+    settings.AUTH_USER_MODEL,
+    on_delete=models.SET_NULL,
+    null=True,          # <— important
+    blank=True,         # <— for admin forms
+    related_name='Requests'
     )
+ 
     applicant = models.ForeignKey(
         NewJoineProfile,
         on_delete=models.CASCADE,
         related_name='Requests'
     )
+
     STATUS_CHOICES = [
         ('PENDING', 'Pending'),
         ('SELECTED', 'Selected'),
         ('REJECTED', 'Rejected'),
     ]
+
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+
     remarks = models.TextField(blank=True)
+    
     reviewed_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

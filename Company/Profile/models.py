@@ -175,7 +175,9 @@ class NewJoineProfile(models.Model):
     AdharCard = models.ImageField(upload_to='Profile/Adhar/')
     technology = models.CharField(max_length=100, blank=True, null=True)
     Experience = models.CharField(max_length=100, blank=True, null=True)
-
+    
+    def __str__(self):
+        return self.FullName
 
 
 class InternProfile(models.Model):
