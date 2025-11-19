@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #Backend
     'Requests',
     'Profile',
+    'Projects',
 
     #frontend
 

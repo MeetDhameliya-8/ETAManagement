@@ -1,0 +1,149 @@
+/* GENERAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: rgba(191, 176, 176, 0.92);
+  color: white;
+}
+
+/* NAVBAR GLASS STYLE */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 18px 40px;
+  
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(238, 182, 182, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 17px;
+
+  transition: 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: white;
+  opacity: 0.8;
+}
+
+/* CENTER GLASS CARD */
+.home-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start; /* align items to left */
+  align-items: flex-start;     /* align items from top */
+  padding-top: 120px;          /* offset for navbar */
+  padding-left: 40px;          /* space from left edge */
+  flex-direction: column;      /* stack cards vertically */
+  gap: 30px;                   /* space between cards */
+}
+
+
+.glass-card {
+  width: 480px;
+  padding: 45px 35px;
+  text-align: left;
+
+  /* Glassmorphism (same vibe as upload button) */
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 28px;
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+
+.glass-card h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.glass-card p {
+  font-size: 18px;
+  opacity: 0.85;
+  letter-spacing: -0.2px;
+}
+
+.top-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15); /* glass effect */
+    color: white;
+    font-weight: 600;
+    border-radius: 20px; /* rounded rectangle */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.top-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.glass-card .top-button {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
+
+
+
+.glass-card {
+    position: relative; /* enable absolute positioning inside card */
+    width: 480px;
+    padding: 45px 35px;
+    text-align: left; /* optional: aligns text to left */
+    background: rgba(255, 255, 255, 0.13);
+    border-radius: 28px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+

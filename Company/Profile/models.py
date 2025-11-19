@@ -42,6 +42,7 @@ ASSIGNER = [
 ]
 
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
@@ -131,7 +132,10 @@ class User(AbstractBaseUser,PermissionsMixin):
         return self.role == 'Owner'
 
     def __str__(self):
-        return self.email
+        tech = self.technology if self.technology else "NoTech"
+        role = self.role if self.role else "NoRole"
+        return f"{self.first_name} {self.last_name} ({role} | {tech} | {self.email})"
+
     
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

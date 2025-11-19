@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>NewJoinee Application</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <style>
-        
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #000; /* black background */
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,112 +20,122 @@
         }
 
         .container {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            width: 400px;
+            width: 420px;
+            padding: 35px;
+            border-radius: 15px;
+
+            /* Glassmorphism */
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            box-shadow: 0 0 25px rgba(255,255,255,0.1);
         }
 
         h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: #333;
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: bold;
-            color: #555;
+            color: #fff;
         }
 
         input[type=text], input[type=file], select {
             width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 20px;
+            padding: 11px;
+            margin-bottom: 18px;
             border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 15px;
+        }
+
+        input::placeholder {
+            color: #ddd;
         }
 
         select {
-            background: #fff;
-            appearance: none;
+            color: #fff;
+            background: rgba(255,255,255,0.1);
         }
 
         button {
             width: 100%;
             padding: 12px;
-            border: none;
-            border-radius: 6px;
             background: #4CAF50;
+            border: none;
             color: white;
-            font-size: 16px;
+            font-size: 17px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: 0.3s ease;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
         button:hover {
             background: #45a049;
         }
-
-        .assigner-container {
-            margin-bottom: 20px;
-        }
-
-        .assigner-container select {
-            width: 100%;
-        }
     </style>
 </head>
+
 <body>
+
 <div class="container">
     <h2>NewJoinee Application</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
 
-    <label for="FullName">Full Name</label>
-    <input type="text" name="FullName" placeholder="Enter your full name" required>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-    <label for="Resume">Resume</label>
-    <input type="file" name="Resume" required>
+        <label for="FullName">Full Name</label>
+        <input type="text" name="FullName" placeholder="Enter your full name" required>
 
-    <label for="AdharCard">Adhar Card</label>
-    <input type="file" name="AdharCard" required>
+        <label for="skill">Skill</label>
+        <input type="text" name="skill" placeholder="Your primary skill" required>
 
-    <label for="technology">Technology</label>
-    <select name="technology" required>
-        <option value="BD">Backend</option>
-        <option value="FD">Frontend</option>
-        <option value="FS">Fullstack</option>
-    </select>
+        <label for="Resume">Resume</label>
+        <input type="file" name="Resume" required>
 
-    <label for="Experience">Experience</label>
-    <select name="Experience" required>
-        <option value="1Y">1 Year</option>
-        <option value="2Y">2 Years</option>
-        <option value="3Y">3 Years</option>
-        <option value="4Y">4 Years</option>
-        <option value="5Y">5 Years</option>
-        <option value="6Y">6 Years</option>
-        <option value="7Y+">7+ Years</option>
-    </select>
+        <label for="AdharCard">Aadhar Card</label>
+        <input type="file" name="AdharCard" required>
 
-    <div class="assigner-container">
-        <label for="assigner">Assigner (Who should review this?)</label>
+        <label for="technology">Technology</label>
+        <select name="technology" required>
+            <option value="BD">Backend</option>
+            <option value="FD">Frontend</option>
+            <option value="FS">Fullstack</option>
+        </select>
+
+        <label for="Experience">Experience</label>
+        <select name="Experience" required>
+            <option value="1Y">1 Year</option>
+            <option value="2Y">2 Years</option>
+            <option value="3Y">3 Years</option>
+            <option value="4Y">4 Years</option>
+            <option value="5Y">5 Years</option>
+            <option value="6Y">6 Years</option>
+            <option value="7Y+">7+ Years</option>
+        </select>
+
+        <label for="assigner">Assigner</label>
         <select name="assigner">
             <option value="MG">Manager</option>
             <option value="Emp">Employee</option>
             <option value="OWN">Owner</option>
             <option value="HR">HR</option>
         </select>
-    </div>
 
-    <button type="submit">Submit Application</button>
-</form>
-
+        <button type="submit">Submit Application</button>
+    </form>
 </div>
+
 </body>
 </html>
-

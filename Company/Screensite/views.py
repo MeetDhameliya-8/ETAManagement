@@ -170,7 +170,7 @@ def newjoinee_apply(request):
         # --- Redirect ---
         return redirect('Screensite:confirmation')
 '''
-@login_required(login_url='/Screensite/login/')
+'''@login_required(login_url='/Screensite/login/')
 def newjoinee_apply(request):
     if request.method == 'POST':
         # --- 1️⃣ Collect form data safely ---
@@ -219,8 +219,43 @@ def newjoinee_apply(request):
         return redirect('Screensite:confirmation')
 
     # --- GET request ---
-    return render(request, 'Screensite/newjoine_Profile.html')
+    return render(request, 'Screensite/newjoine_Profile.html')'''
 
+
+@login_required(login_url='/Screensite/login/')
+def newjoinee_apply(request):
+    if request.method == "POST":
+
+        FullName = request.POST.get('FullName')
+        Resume = request.FILES.get('Resume')
+        AdharCard = request.FILES.get('AdharCard')
+        technology = request.POST.get('technology')
+        Experience = request.POST.get('Experience')
+
+        # 1️⃣ Create the NewJoinee Profile (save applicant data)
+        applicant_profile = NewJoineProfile.objects.create(
+            FullName=FullName,
+            user=request.user,
+            Resume=Resume,
+            AdharCard=AdharCard,
+            technology=technology,
+            Experience=Experience,
+        )
+
+        # 2️⃣ Create HR Request with only applicant reference
+        HRRequest.objects.create(
+            applicant=applicant_profile,
+            hr_user=None,   # HR will assign later
+            status='PENDING'
+        )
+
+        return render(request, "Screensite/home.html")
+
+    return render(request, "Screensite/newjoine_profile.html")
+
+
+def home(request):
+    return render(request, "Screensite/home.html")
 
 def confirmation(request):
     return render(request, 'Screensite/confirmation.html')
