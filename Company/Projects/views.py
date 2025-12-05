@@ -9,7 +9,71 @@ from django.contrib.auth.decorators import login_required
 from Profile.models import EmployeeProfile, User
 from functools import wraps
 from .models import Project
+from .forms import EmployeeUpdateForm, InternUpdateForm, NewjoineUpdateForm, HrUpdateForm
 
+
+# below 4 functions are for forms
+
+
+
+
+@manager_required
+def create_employee_update(request):
+    if request.method == 'POST':
+        form = EmployeeUpdateForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect('home')  # or project detail
+    else:
+        form = EmployeeUpdateForm()
+    return render(request, 'updates/create_employee_update.html', {'form': form})
+
+
+
+@manager_required
+def create_intern_update(request):
+    if request.method == 'POST':
+        form = InternUpdateForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect('home')
+    else:
+        form = InternUpdateForm()
+    return render(request, 'updates/create_intern_update.html', {'form': form})
+
+
+
+@manager_required
+def create_newjoine_update(request):
+    if request.method == 'POST':
+        form = NewjoineUpdateForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect('home')
+    else:
+        form = NewjoineUpdateForm()
+    return render(request, 'updates/create_newjoine_update.html', {'form': form})
+
+
+
+@manager_required
+def create_hr_update(request):
+    if request.method == 'POST':
+        form = HrUpdateForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.created_by = request.user
+            obj.save()
+            return redirect('home')
+    else:
+        form = HrUpdateForm()
+    return render(request, 'updates/create_hr_update.html', {'form': form})
 
 
 
@@ -17,18 +81,17 @@ from .models import Project
 
 
 def manager_required(view_func):
-    @wraps(view_func)
-    def wrapper(request, *args, **kwargs):
+    def _wrapped_view(request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return redirect('Screensite:login')
-
-        # normalize role and check
-        role = str(getattr(request.user, 'role', '')).upper().strip()
-        if role not in ('MG', 'MANAGER'):
-            return redirect('Screensite:home')   # redirect non-managers to home (not to dashboard)
+            return redirect('/Screensite/login/')
+        
+        # Your role check
+        if getattr(request.user, "role", None) != "MG":
+            return HttpResponse("Unauthorized: Only managers can perform this action.", status=403)
 
         return view_func(request, *args, **kwargs)
-    return wrapper
+
+    return _wrapped_view
 
 
 
@@ -37,10 +100,8 @@ def manager_required(view_func):
 
   # if you save decorator there
 @login_required(login_url='/Screensite/login/')
+@manager_required
 def create_project(request):
-    if request.user.role != "MG":
-        return HttpResponse("Unauthorized")
-
     if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
@@ -129,6 +190,10 @@ def project_detail(request, project_id):
 def add_task(request, project_id):
     project = get_object_or_404(Project, id=project_id)
 
+    # Optional: prevent managers from editing others’ projects
+    if project.manager != request.user:
+        return HttpResponse("Unauthorized: You cannot add tasks to a project you don't manage.", status=403)
+
     if request.method == "POST":
         title = request.POST.get("title")
         description = request.POST.get("description")
@@ -141,12 +206,10 @@ def add_task(request, project_id):
             status=status
         )
 
-        # IMPORTANT: After success, redirect to project detail
         return redirect("project:project_detail", project_id=project.id)
 
-    return render(request, "projects/add_task.html", {
-        "project": project
-    })
+    return render(request, "projects/add_task.html", {"project": project})
+
 
 
 
