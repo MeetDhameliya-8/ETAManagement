@@ -1,0 +1,15 @@
+{% extends "Projects/base.html" %}
+{% block title %}HR Update{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h3>HR Update</h3>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

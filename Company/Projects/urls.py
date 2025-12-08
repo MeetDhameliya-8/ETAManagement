@@ -11,6 +11,17 @@ urlpatterns = [
     path('project/<int:project_id>/assign/', views.assign_members, name='assign_members'),
     path('project/<int:project_id>/', views.project_detail, name='project_detail'), 
     path('project/<int:project_id>/task/add/', views.add_task, name='add_task'),
+
+
+    #forms
+
+    path("employee/update/",views.employee_update_view, name="employee_update"),
+    path("intern/update/", views.intern_update_view, name="intern_update"),
+    path("newjoinee/update/",views.newjoinee_update_view, name="newjoinee_update"),
+    path("hr/update/", views.hr_update_view, name="hr_update"),  
+
 ]
+
+
 
 

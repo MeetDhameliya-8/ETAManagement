@@ -17,63 +17,61 @@ from .forms import EmployeeUpdateForm, InternUpdateForm, NewjoineUpdateForm, HrU
 
 
 
-@manager_required
-def create_employee_update(request):
-    if request.method == 'POST':
+def employee_update_view(request):
+    if request.method == "POST":
         form = EmployeeUpdateForm(request.POST)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.created_by = request.user
-            obj.save()
-            return redirect('home')  # or project detail
+            form.save()
+            return redirect("employee_update_success")  # define this url
     else:
         form = EmployeeUpdateForm()
-    return render(request, 'updates/create_employee_update.html', {'form': form})
+
+    return render(request, "Project/employee_update_form.html", {"form": form})
 
 
 
-@manager_required
-def create_intern_update(request):
-    if request.method == 'POST':
+def intern_update_view(request):
+    if request.method == "POST":
         form = InternUpdateForm(request.POST)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.created_by = request.user
-            obj.save()
-            return redirect('home')
+            form.save()
+            return redirect("intern_update_success")
     else:
         form = InternUpdateForm()
-    return render(request, 'updates/create_intern_update.html', {'form': form})
+
+    return render(request, "Projects/intern_update_form.html", {"form": form})
 
 
 
-@manager_required
-def create_newjoine_update(request):
-    if request.method == 'POST':
+
+def newjoinee_update_view(request):
+    if request.method == "POST":
         form = NewjoineUpdateForm(request.POST)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.created_by = request.user
-            obj.save()
-            return redirect('home')
+            form.save()
+            return redirect("newjoinee_update_success")
     else:
         form = NewjoineUpdateForm()
-    return render(request, 'updates/create_newjoine_update.html', {'form': form})
+
+    return render(request, "Projects/newjoinee_update_form.html", {"form": form})
 
 
 
-@manager_required
-def create_hr_update(request):
-    if request.method == 'POST':
+
+def hr_update_view(request):
+    if request.method == "POST":
         form = HrUpdateForm(request.POST)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.created_by = request.user
-            obj.save()
-            return redirect('home')
+            form.save()
+            return redirect("hr_update_success")
     else:
         form = HrUpdateForm()
-    return render(request, 'updates/create_hr_update.html', {'form': form})
+
+    return render(request, "Projects/hr_update_form.html", {"form": form})
+
+
+
+
 
 
 

@@ -30,38 +30,41 @@ class Task(models.Model):
 
 
 class EmployeeUpdate(models.Model):
+    Project = models.CharField(max_length=255, blank=True, null=True)
+    task = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    Things_To_Notice = models.TextField(blank=True, null=True)
+    Deadline = models.DateTimeField(blank=True, null=True)
 
-    Project = models.CharField()
-    task = models.CharField()
-    description = models.TextField()
-    Things_To_Notice = models.TextField()
-    Deadline = models.DateTimeField()
+    def __str__(self):
+        return self.Project or "Employee Update"
 
 
 class InternUpdate(models.Model):
+    Project = models.CharField(max_length=255, blank=True, null=True)
+    LearnToday = models.CharField(max_length=255, blank=True, null=True)
+    Source = models.CharField(max_length=255, blank=True, null=True)
+    WorkWith = models.TextField(blank=True, null=True)
 
-    Project = models.CharField()
-    LearnToday = models.CharField()
-    Source = models.CharField()
-    WorkWith = models.TextField()
+    def __str__(self):
+        return self.Project or "Intern Update"
+
 
 class NewjoineUpdate(models.Model):
+    Announcement = models.CharField(max_length=255, blank=True, null=True)
+    FieldToDecide = models.TextField(blank=True, null=True)
+    BePreparedFor = models.CharField(max_length=255, blank=True, null=True)
 
-    Announcement = models.CharField() 
-    FieldToDecide = models.TextField()
-    BePreparedFor = models.CharField()
-
+    def __str__(self):
+        return self.Announcement or "New Joinee Update"
 
 
 class HrUpdate(models.Model):
+    taskUpdate = models.TextField(blank=True, null=True)
+    NewRule = models.CharField(max_length=255, blank=True, null=True)
+    Notice = models.TextField(blank=True, null=True)
+    Celebration = models.TextField(blank=True, null=True)
+    Preparation = models.TextField(blank=True, null=True)
 
-    taskUpdate = models.TextField()
-    NewRule = models.CharField()
-    Notice = models.TextField()
-    Celebration = models.TextField()
-    Preparation = models.TextField()
-
-
-
-   
-
+    def __str__(self):
+        return self.NewRule or "HR Update"

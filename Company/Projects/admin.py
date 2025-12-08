@@ -39,72 +39,35 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 
-
-
-
-
-class ManagerOnlyAdminMixin:
-
-
-    def _is_manager(self, request):
-        return bool(request.user and request.user.is_active and hasattr(request.user, 'manager_profile'))
-
-    def has_add_permission(self, request):
-
-        if request.user.is_superuser:
-            return True
-        return self._is_manager(request)
-
-    def has_delete_permission(self, request, obj=None):
-        if request.user.is_superuser:
-            return True
-        
-        if not self._is_manager(request):
-            return False
-        
-        if obj is not None and hasattr(obj, 'manager'):
-            return obj.manager == request.user
-        return True
-
-    def has_change_permission(self, request, obj=None):
-    
-        if request.user.is_superuser:
-            return True
-        
-        if not self._is_manager(request):
-            return False
-        
-        if obj is not None and hasattr(obj, 'manager'):
-            return obj.manager == request.user
-        return True
-
    
 
 @admin.register(EmployeeUpdate)
-class EmployeeUpdateAdmin(ManagerOnlyAdminMixin, admin.ModelAdmin):
-    list_display = ('Project', 'task', 'created_by', 'created_at')
-    search_fields = ('Project', 'task', 'created_by__email')
-
+class EmployeeUpdateAdmin(admin.ModelAdmin):
+    list_display = ("Project", "task", "Deadline")
+    search_fields = ("Project", "task", "description", "Things_To_Notice")
+    list_filter = ("Deadline",)
+    ordering = ("-Deadline",)
 
 
 @admin.register(InternUpdate)
-class InternUpdateAdmin(ManagerOnlyAdminMixin, admin.ModelAdmin):
-    list_display = ('Project', 'LearnToday', 'created_by', 'created_at')
-    search_fields = ('Project', 'LearnToday')
-
+class InternUpdateAdmin(admin.ModelAdmin):
+    list_display = ("Project", "LearnToday", "Source")
+    search_fields = ("Project", "LearnToday", "Source", "WorkWith")
+    ordering = ("Project",)
 
 
 @admin.register(NewjoineUpdate)
-class NewjoineUpdateAdmin(ManagerOnlyAdminMixin, admin.ModelAdmin):
-    list_display = ('Announcement', 'created_by', 'created_at')
-    search_fields = ('Announcement',)
-
+class NewjoineUpdateAdmin(admin.ModelAdmin):
+    list_display = ("Announcement", "BePreparedFor")
+    search_fields = ("Announcement", "BePreparedFor", "FieldToDecide")
+    ordering = ("Announcement",)
 
 
 @admin.register(HrUpdate)
-class HrUpdateAdmin(ManagerOnlyAdminMixin, admin.ModelAdmin):
-    list_display = ('NewRule', 'created_by', 'created_at')
-    search_fields = ('NewRule', 'Notice')
+class HrUpdateAdmin(admin.ModelAdmin):
+    list_display = ("NewRule", "taskUpdate", "Notice")
+    search_fields = ("NewRule", "taskUpdate", "Notice", "Celebration", "Preparation")
+    ordering = ("NewRule",)
     
 
 

@@ -1,0 +1,16 @@
+{% extends "Projects/base.html" %}
+{% block title %}Intern Update{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h3>Intern Update</h3>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary mt-2" type="submit">Submit</button>
+      <a class="btn btn-link" href="{% url 'intern_list' %}">View all</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
