@@ -42,6 +42,7 @@ from Profile.models import NewJoineProfile
         return f"{self.applicant.FullName} - {self.status}"
 '''
 
+
 class HRRequest(models.Model):
 
     hr_user = models.ForeignKey(

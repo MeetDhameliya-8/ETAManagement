@@ -30,6 +30,7 @@ class Task(models.Model):
 
 
 class EmployeeUpdate(models.Model):
+
     Project = models.CharField(max_length=255, blank=True, null=True)
     task = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -46,6 +47,7 @@ class EmployeeUpdate(models.Model):
 
     def __str__(self):
         return self.Project or "Employee Update"
+
 
 
 class InternUpdate(models.Model):
@@ -68,8 +70,12 @@ class InternUpdate(models.Model):
 
 
 class NewjoineUpdate(models.Model):
+
+
     Announcement = models.CharField(max_length=255, blank=True, null=True)
+
     FieldToDecide = models.TextField(blank=True, null=True)
+
     BePreparedFor = models.CharField(max_length=255, blank=True, null=True)
 
     created_by = models.ForeignKey(
@@ -78,14 +84,18 @@ class NewjoineUpdate(models.Model):
         null=True,
         blank=True
     )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.Announcement or "New Joinee Update"
+    
+
 
 
 
 class HrUpdate(models.Model):
+
     taskUpdate = models.TextField(blank=True, null=True)
     NewRule = models.CharField(max_length=255, blank=True, null=True)
     Notice = models.TextField(blank=True, null=True)
@@ -102,3 +112,5 @@ class HrUpdate(models.Model):
 
     def __str__(self):
         return self.NewRule or "HR Update"
+
+

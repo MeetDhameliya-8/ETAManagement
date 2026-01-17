@@ -187,6 +187,7 @@ class NewJoineProfile(models.Model):
         return self.FullName
 
 
+
 class InternProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -206,6 +207,7 @@ class EmployeeProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='employee_profile')
     salary = models.DecimalField(null=False,blank=False,max_digits=10, decimal_places=2)
     phone = models.CharField(max_length=25,unique=False,blank=True,null=True)
@@ -222,6 +224,7 @@ class EmployeeProfile(models.Model):
 
 
 
+
 class HrProfile(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -232,9 +235,9 @@ class HrProfile(models.Model):
     position = models.CharField(max_length=100, blank=False,null=False)                
     contact_number = models.CharField(max_length=15, blank=False,null=False, unique=True)
     candidates_managed = models.PositiveIntegerField(default=0)                                 
-    employees_under = models.PositiveIntegerField(default=0)  # number of employees handled
-    interviews_scheduled = models.PositiveIntegerField(default=0)               
-    can_hire = models.BooleanField(default=True)               
+    employees_under = models.PositiveIntegerField(default=0)                                                         # number of employees handled
+    interviews_scheduled = models.PositiveIntegerField(default=0)                 
+    can_hire = models.BooleanField(default=True)                                     
     max_open_positions = models.IntegerField(default=1)         
     current_openings = models.IntegerField(default=0)           
     can_assign_to_manager = models.BooleanField(default=True)
@@ -265,9 +268,24 @@ class OwnerProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='owner_profile')
     FullName = models.CharField(max_length=250, blank=False,null=False)
     Experience = models.CharField(max_length=600, blank=False, null=False)
-    skills = ArrayField(models.CharField(max_length=50), blank=False, null=False, default=list) 
+    skills =  ArrayField(models.CharField(max_length=50), blank=False, null=False, default=list) 
     Projects_Completed = models.IntegerField(blank=False,null=False,default='10+')
 
 
 
 # Create your models here.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

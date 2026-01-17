@@ -12,7 +12,7 @@ from .models import Project,EmployeeUpdate,InternUpdate,HrUpdate,NewjoineUpdate
 from .forms import EmployeeUpdateForm, InternUpdateForm, NewjoineUpdateForm, HrUpdateForm
 from Interactions.forms import CommunicationForm
 
-# below 4 functions are for forms
+# below 4 functions are for forms 
 
 
 
@@ -96,6 +96,7 @@ def newjoinee_update_view(request):
 
 
 
+
 def hr_update_view(request):
     updates = HrUpdate.objects.all().order_by("-created_at")
 
@@ -145,7 +146,7 @@ def manager_required(view_func):
 
 
 
-  # if you save decorator there
+# if you save decorator there
 @login_required(login_url='/Screensite/login/')
 @manager_required
 def create_project(request):
@@ -164,6 +165,7 @@ def create_project(request):
         return redirect("project:assign_members", project_id=project.id)
 
     return render(request, "project/create_project.html")
+
 
 
 
@@ -235,6 +237,7 @@ def project_detail(request, project_id):
 
 
 
+
 @manager_required
 def add_task(request, project_id):
     project = get_object_or_404(Project, id=project_id)
@@ -258,6 +261,26 @@ def add_task(request, project_id):
         return redirect("project:project_detail", project_id=project.id)
 
     return render(request, "projects/add_task.html", {"project": project})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
